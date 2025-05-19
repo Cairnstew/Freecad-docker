@@ -1,21 +1,36 @@
-version: '3.8'
+version: "3.9"
 
 services:
   freecad:
-    build: .
-    container_name: freecad-vscode
+    image: lscr.io/linuxserver/freecad:latest
+    container_name: freecad
     ports:
-      - "${SSH_PORT}:2222"     # SSH port for VSCode remote connection
-      - 3000:3000             # FreeCAD GUI HTTP
-      - 3001:3001             # FreeCAD GUI HTTPS
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - PASSWORD=${PASSWORD}
+      - "${SSH_PORT}:2222" 
+      - "3000:3000"  # HTTP
+      - "3001:3001"  # HTTPS
     volumes:
-      - ./config:/config
-      - ./projects:/root/projects    # Mount your code/projects here for editing
-    security_opt:
-      - seccomp:unconfined
+      - ./freecad-config:/config
+    environment:
+      - PUID=${PUID}       # Match your host user ID
+      - PGID=${PGID}       # Match your host group ID
+      - TZ=${TZ}  # Set your timezone
+      - CUSTOM_USER=${CUSTOM_USER}     # Optional basic auth
+      - PASSWORD=${PASSWORD}       # Optional basic auth password
+      # Optional: install extra packages like git, gdb
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      - INSTALL_PACKAGES=libfuse2|git|gdb
     restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined  # Required for newer syscalls
+    # Optional GPU support (NVIDIA):
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [compute,video,graphics,utility]
+    # Optional device mount for DRI3 GPU acceleration:
+    # Uncomment this if using Intel/AMD open-source GPU drivers:
+    # devices:
+    #   - /dev/dri:/dev/dri
