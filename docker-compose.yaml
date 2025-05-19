@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   freecad:
-    image: lscr.io/linuxserver/freecad:latest
+    #image: lscr.io/linuxserver/freecad:latest
     container_name: freecad
     ports:
       - "${SSH_PORT}:2222" 
