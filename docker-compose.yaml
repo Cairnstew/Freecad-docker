@@ -2,8 +2,9 @@ version: "3.9"
 
 services:
   freecad:
-    #image: lscr.io/linuxserver/freecad:latest
-    container_name: freecad
+    build:
+      context: .             # path to directory containing the Dockerfile
+      dockerfile: Dockerfile # optional if named 'Dockerfile'
     ports:
       - "${SSH_PORT}:2222" 
       - "3000:3000"  # HTTP
