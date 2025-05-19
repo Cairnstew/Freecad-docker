@@ -17,8 +17,8 @@ services:
       - CUSTOM_USER=${CUSTOM_USER}     # Optional basic auth
       - PASSWORD=${PASSWORD}       # Optional basic auth password
       # Optional: install extra packages like git, gdb
-      - DOCKER_MODS=linuxserver/mods:universal-package-install
-      - INSTALL_PACKAGES=libfuse2|git|gdb
+      #- DOCKER_MODS=linuxserver/mods:universal-package-install
+      #- INSTALL_PACKAGES=libfuse2|git|gdb
     restart: unless-stopped
     security_opt:
       - seccomp:unconfined  # Required for newer syscalls
