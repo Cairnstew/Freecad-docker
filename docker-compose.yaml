@@ -23,13 +23,13 @@ services:
     security_opt:
       - seccomp:unconfined  # Required for newer syscalls
     # Optional GPU support (NVIDIA):
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [compute,video,graphics,utility]
+    #deploy:
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - driver: nvidia
+    #          count: 1
+    #          capabilities: [compute,video,graphics,utility]
     # Optional device mount for DRI3 GPU acceleration:
     # Uncomment this if using Intel/AMD open-source GPU drivers:
     # devices:
