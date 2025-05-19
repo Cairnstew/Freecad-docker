@@ -9,7 +9,7 @@ ENV TZ=Etc/UTC
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     git cmake build-essential clang libtool lsb-release \
-    libxerces-c-dev libboost-all-dev libcoin80-dev \
+    libxerces-c-dev libboost-all-dev libcoin-dev \
     libspnav-dev libode-dev libeigen3-dev libqt5x11extras5-dev \
     libqt5svg5-dev libqt5opengl5-dev qttools5-dev qttools5-dev-tools \
     libpyside2-dev python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qtwidgets \
